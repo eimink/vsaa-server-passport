@@ -55,7 +55,7 @@ perl -pi -e "s/database :.*,/database : \"$dbname\",/" config.js
 perl -pi -e "s/listen :.*,/listen : $port,/" config.js
 
 echo "Installing node modules..."
-sudo npm install restify restify-oauth2 underscore crypto sharedmemory $dbmodule
+sudo npm install restify passport underscore crypto sharedmemory $dbmodule
 
 echo "You're all set! Make sure you have prepared the database as described in schema/$dbmodule.md"
 

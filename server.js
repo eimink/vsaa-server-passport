@@ -7,15 +7,16 @@ global.db = require("./databases/"+config.db_driver); // This is a bit of a hack
 
 // Required node modules
 var restify = require("restify");
-var restifyOAuth2 = require("restify-oauth2");
+//var restifyOAuth2 = require("restify-oauth2");
 var cluster = require('cluster');
-var hooks = require("./hooks");
+//var hooks = require("./hooks");
+var passport = require('passport');
 
 // Process variables
 
 var server = restify.createServer({
 	name: "Very Simple Application Analytics Server",
-	version: "0.0.3",
+	version: "0.0.1-passport",
 	formatters: {
 		"application/hal+json": function (req, res, body) {
 			return res.formatters["application/json"](req, res, body);
@@ -36,8 +37,14 @@ var RESOURCES = Object.freeze({
 });
 
 server.use(restify.authorizationParser());
-server.use(restify.bodyParser({ mapParams: false }));
-	restifyOAuth2.cc(server, { tokenEndpoint: RESOURCES.TOKEN, hooks: hooks });
+//server.use(restify.bodyParser({ mapParams: false }));
+//	restifyOAuth2.cc(server, { tokenEndpoint: RESOURCES.TOKEN, hooks: hooks });
+server.use(function(req,res,next) {
+	res.redirect = function(addr) {
+		res.header('Location',addr);
+		res.send(302);
+	}
+});
 server.get(RESOURCES.INITIAL, function (req, res) {
 	var response = {
 		_links: {
