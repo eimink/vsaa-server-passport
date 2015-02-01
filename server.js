@@ -85,6 +85,44 @@ server.get(RESOURCES.INITIAL, function (req, res) {
 	res.send(response);
 });
 
+server.put(RESOURCES.REG_USER, function(req,res) {
+	var response = {
+		_links: {
+			self: { href: RESOURCES.INITIAL }
+		}
+	};
+	if (req.username && req.email && req.password)
+		if(User.register(username,email,password))
+			response._links["auth-token"] = {
+			href: RESOURCES.TOKEN,
+			"grant-types": "client_credentials",
+			"token-types": "bearer"
+		};
+		else
+			response._links["http://rel.example.com/register"] = { href: RESOURCES.REG_USER };
+	res.contentType = "application/hal+json";
+	res.send(response);
+});
+
+server.del(RESOURCES.DEL_USER, function(req,res) {
+	var response = {
+		_links: {
+			self: { href: RESOURCES.INITIAL }
+		}
+	};
+	if (req.username && req.email && req.password)
+		if(User.delete(username,email,password))
+			response._links["http://rel.example.com/register"] = { href: RESOURCES.REG_USER };
+		else
+			response._links["auth-token"] = {
+				href: RESOURCES.TOKEN,
+				"grant-types": "client_credentials",
+				"token-types": "bearer"
+			};
+	res.contentType = "application/hal+json";
+	res.send(response);
+});
+
 /*server.post(RESOURCES.EVENT, function (req, res) {
 	if (!req.clientId) {
 		return res.sendUnauthenticated();
