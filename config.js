@@ -6,7 +6,7 @@ module.exports = {
 	listen : 8080,
 		
 	// Database driver
-	db_driver : "mysql",
+	db_driver : "mongodb",
 	
 	// MySQL specific
 	mysql : {

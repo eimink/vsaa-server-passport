@@ -1,0 +1,16 @@
+{
+	"name": "vsaa-server-passport",
+	"version": "0.0.1",
+	"dependencies": {
+		"cluster": "latest",
+		"restify": "latest",
+		"passport" : "~0.1.17",
+		"passport-local" : "~0.1.6",
+		"passport-http" : "latest",
+		"bcrypt-nodejs": "latest",
+		"bson": "latest",
+		"underscore": "latest",
+		"mongojs": "latest",
+		"crypto": "latest"
+	}
+}
