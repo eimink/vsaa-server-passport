@@ -12,6 +12,7 @@ var cluster = require('cluster');
 //var hooks = require("./hooks");
 var passport = require('passport'),
 	LocalStrategy = require('passport-local').Strategy;
+var User = require("./user");
 
 // Process variables
 
@@ -57,7 +58,6 @@ passport.use(new LocalStrategy(
 
 server.post(RESOURCES.TOKEN,passport.authenticate('local', { successRedirect: '/',failureRedirect: '/login',failureFlash: true }));
 
-//	restifyOAuth2.cc(server, { tokenEndpoint: RESOURCES.TOKEN, hooks: hooks });
 server.use(function(req,res,next) {
 	res.redirect = function(addr) {
 		res.header('Location',addr);
