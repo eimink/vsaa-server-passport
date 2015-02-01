@@ -2,7 +2,7 @@
 
 module.exports.findOne = function(username, done) {
 	// get user from db
-	db.user.findOne({"name":username}, function (err, res){
+	global.db.user.findOne({"name":username}, function (err, res){
 		if(err || !res)
 			return done(err,false);
 		else {

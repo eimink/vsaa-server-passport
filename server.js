@@ -3,7 +3,7 @@
 // Configuration
 global.config = require("./config");
 
-//global.db = require("./databases/"+config.db_driver); // This is a bit of a hack and outdated way of doing things...
+global.db = require("./databases/"+config.db_driver); // This is a bit of a hack and outdated way of doing things...
 
 // Required node modules
 var restify = require("restify");
